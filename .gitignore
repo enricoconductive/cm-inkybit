@@ -6,4 +6,3 @@ pxt_modules
 .vscode
 *.db
 *.tgz
-package-lock.json
