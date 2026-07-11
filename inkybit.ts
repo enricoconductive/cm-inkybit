@@ -445,6 +445,22 @@ namespace inkybit {
         }
     }
 
+    //% color="#00A651" weight=90
+    //% block="draw image %data"
+    //% data.shadow=inkyimage_picker
+    export function drawFullScreenImage(data: Buffer): void {
+        _drawFullScreenImage(data)
+    }
+
+    //% color="#00A651"
+    //% blockId=inkyimage_picker block="image"
+    //% shim=TD_ID
+    //% blockHidden=1
+    //% duplicateShadowOnDrag
+    export function inkyimage_picker(): Buffer {
+        return inkybitAllWhiteV1
+    }
+
     export function init() {
         _init()
     }
@@ -461,6 +477,11 @@ namespace inkybit {
 
     //% shim=inkybit::setPixel
     function _setPixel(x: number, y: number, color: number): void {
+        return
+    }
+
+    //% shim=inkybit::drawFullScreenImage
+    function _drawFullScreenImage(data: Buffer): void {
         return
     }
 

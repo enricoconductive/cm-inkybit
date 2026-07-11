@@ -11,7 +11,8 @@
         "display.cpp",
         "font.cpp",
         "shims.d.ts",
-        "inkybit.ts"
+        "inkybit.ts",
+        "fixtures/ibit-v1/all-white.ts"
     ],
     "testFiles": [
         "test.ts"

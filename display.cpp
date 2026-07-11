@@ -177,6 +177,55 @@ namespace inkybit {
     }
 
     //%
+    void drawFullScreenImage(Buffer data) {
+        if (data->length != 7510) return;
+
+        const uint8_t *payload = data->data;
+        if (payload[0] != 'I' || payload[1] != 'B' || payload[2] != 'I' || payload[3] != 'T') return;
+        if (payload[4] != 1) return;
+        if (payload[5] != 1) return;
+        uint16_t w = payload[6] | (payload[7] << 8);
+        uint16_t h = payload[8] | (payload[9] << 8);
+        if (w != 250 || h != 120) return;
+
+        for (int i = 10; i < 7510; i++) {
+            if ((payload[i] & 0x03) == 3) return;
+            if ((payload[i] & 0x0C) == 0x0C) return;
+            if ((payload[i] & 0x30) == 0x30) return;
+            if ((payload[i] & 0xC0) == 0xC0) return;
+        }
+
+        memset(buf_b, 0xff, (COLS / 8) * ROWS);
+        memset(buf_r, 0x00, (COLS / 8) * ROWS);
+
+        for (int py = 0; py < 120; py++) {
+            for (int px = 0; px < 250; px++) {
+                int pixelIndex = py * 250 + px;
+                int byteOffset = 10 + (pixelIndex >> 2);
+                int bitShift = 6 - 2 * (pixelIndex & 3);
+                int colour = (payload[byteOffset] >> bitShift) & 0x3;
+
+                int ty = py + OFFSET_Y;
+                ty = COLS - 1 - ty;
+                int shift = 7 - (ty & 7);
+                int bufY = ty >> 3;
+                uint16_t offset = (px * (COLS / 8)) + bufY;
+
+                if (colour == 0) {
+                    buf_b[offset] |= (1 << shift);
+                    buf_r[offset] &= ~(1 << shift);
+                } else if (colour == 1) {
+                    buf_b[offset] &= ~(1 << shift);
+                    buf_r[offset] &= ~(1 << shift);
+                } else {
+                    buf_b[offset] |= (1 << shift);
+                    buf_r[offset] |= (1 << shift);
+                }
+            }
+        }
+    }
+
+    //%
     void init() {
         if(initialized) return;
 
