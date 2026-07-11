@@ -446,19 +446,23 @@ namespace inkybit {
     }
 
     //% color="#00A651" weight=90
-    //% block="draw image %data"
+    //% blockId=inkybit_draw_full_screen_image
+    //% block="draw image $data"
     //% data.shadow=inkyimage_picker
     export function drawFullScreenImage(data: Buffer): void {
         _drawFullScreenImage(data)
     }
 
     //% color="#00A651"
-    //% blockId=inkyimage_picker block="image"
+    //% blockId=inkyimage_picker block="$image"
+    //% image.fieldEditor="inkyimage"
+    //% image.fieldOptions.decompileLiterals=true
+    //% image.fieldOptions.onParentBlock="true"
     //% shim=TD_ID
     //% blockHidden=1
     //% duplicateShadowOnDrag
-    export function inkyimage_picker(): Buffer {
-        return inkybitAllWhiteV1
+    export function inkyimage_picker(image: Buffer = inkybitAllWhiteV1): Buffer {
+        return image
     }
 
     export function init() {
