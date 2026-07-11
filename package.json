@@ -19,6 +19,8 @@
     "pxt:install": "pxt install",
     "test": "pxt test",
     "test:extension": "node tools/configure-pxt-target.mjs && pxt install && pxt test",
+    "test:native-loader": "node tools/test-native-loader.mjs",
+    "fixture:hardware": "node tools/generate-hardware-fixture.mjs",
     "verify:default-image": "node tools/verify-default-image.mjs"
   }
 }

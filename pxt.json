@@ -9,6 +9,7 @@
     "files": [
         "README.md",
         "display.cpp",
+        "ibit_decoder.h",
         "font.cpp",
         "shims.d.ts",
         "inkybit.ts",
