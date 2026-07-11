@@ -1,29 +1,35 @@
-name: MakeCode
+name: MakeCode extension
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - feature/inkybit-image-editor-v1
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-
+  verify:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [8.x]
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+
+      - name: Use the pinned Node.js release
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install
-        run: |
-          npm install -g pxt
-          pxt target microbit
-      - name: build
-        run: |
-          pxt install
-          pxt build --cloud
-        env:
-          CI: true
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install the locked toolchain
+        run: npm ci
+
+      - name: Verify the stable image fixture
+        run: npm run verify:default-image
+
+      - name: Test the native IBIT loader
+        run: npm run test:native-loader
+
+      - name: Compile against the pinned public target
+        run: npm run test:extension
