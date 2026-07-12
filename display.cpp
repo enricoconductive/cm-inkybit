@@ -179,6 +179,7 @@ namespace inkybit {
 
     //%
     void drawFullScreenImage(Buffer data) {
+        if (!data || !buf_b || !buf_r) return;
         inkybit_ibit::decode(data->data, data->length, buf_b, buf_r);
     }
 

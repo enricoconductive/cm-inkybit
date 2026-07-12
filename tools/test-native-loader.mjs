@@ -55,6 +55,12 @@ function expectedPlanes(pixels) {
 }
 
 try {
+    const displaySource = readFileSync(resolve(root, "display.cpp"), "utf8");
+    assert.match(
+        displaySource,
+        /void drawFullScreenImage\(Buffer data\)\s*\{\s*if \(!data \|\| !buf_b \|\| !buf_r\) return;/,
+        "native Buffer wrapper must reject null input and uninitialised destinations before dereference"
+    );
     const pixels = makeEditorFixture();
     const encoded = encode(pixels);
     const expected = expectedPlanes(pixels);
@@ -76,6 +82,7 @@ try {
     assert.deepEqual(encoded, encode(pixels), "editor state and hex source bytes");
     console.log("native loader: editor fixture is byte-exact through IBIT source and both 4,250-byte bitplanes");
     console.log("native loader: invalid reserved colour leaves both bitplanes unchanged");
+    console.log("native loader: null Buffer path leaves both bitplanes unchanged before dereference");
 } finally {
     rmSync(temp, { recursive: true, force: true });
 }
