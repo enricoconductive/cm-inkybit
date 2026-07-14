@@ -10,6 +10,13 @@ A inky:bit is required to use this extension, grab yours here: https://shop.pimo
 
 To use this extension, go to https://makecode.microbit.org/, click "Advanced" then "Add Package" and search for inky:bit.
 
+## Development
+
+Contributors adding or changing MakeCode blocks should start with
+[`docs/BLOCK_DEVELOPMENT.md`](docs/BLOCK_DEVELOPMENT.md). It documents the
+TypeScript/native boundary, block metadata, test workflow, display and IBIT
+contracts, and the paired `pxt-microbit` work required by custom field editors.
+
 ## JavaScript Reference
 
 inky:bit has a 250x122 pixel display, each pixel can be set to white, black or red.
@@ -95,7 +102,7 @@ inkybit.drawText(text: string, x: number, y: number, color: Color, size: TextSiz
 For example:
 
 ```
-inkybit.drawText(0, 1, "Hello World")
+inkybit.drawText("Hello World", 0, 1, inkybit.Color.Black, inkybit.TextSize.Regular)
 ```
 
 ### Measure a text string
