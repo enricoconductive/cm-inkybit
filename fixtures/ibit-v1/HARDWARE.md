@@ -6,7 +6,7 @@ micro:bit V2 and Inky:Bit have been observed by a person.
 ## Generate and flash
 
 1. From this repository, run `node tools/generate-hardware-fixture.mjs > /tmp/inkybit-ticket-05.ts`.
-2. Open the pinned self-hosted MakeCode preview documented by `pxt-microbit`.
+2. Open the pinned self-hosted MakeCode preview documented by `cm-microbit-platform`.
 3. Create a new project, add the Inky:Bit extension at the extension revision
    recorded in that target's `inkybit-toolchain.json`, switch to JavaScript,
    and replace `main.ts` with `/tmp/inkybit-ticket-05.ts`.

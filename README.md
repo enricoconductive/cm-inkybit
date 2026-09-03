@@ -15,7 +15,7 @@ To use this extension, go to https://makecode.microbit.org/, click "Advanced" th
 Contributors adding or changing MakeCode blocks should start with
 [`docs/BLOCK_DEVELOPMENT.md`](docs/BLOCK_DEVELOPMENT.md). It documents the
 TypeScript/native boundary, block metadata, test workflow, display and IBIT
-contracts, and the paired `pxt-microbit` work required by custom field editors.
+contracts, and the paired platform (`cm-microbit-platform`) work required by custom field editors.
 
 ## JavaScript Reference
 

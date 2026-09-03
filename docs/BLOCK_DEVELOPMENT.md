@@ -17,7 +17,7 @@ block can have up to three layers:
 2. **Native hardware implementation** in `display.cpp` or `font.cpp` when the
    operation needs direct micro:bit/CODAL access. A small TypeScript function
    with `//% shim=inkybit::name` binds the public TypeScript layer to C++.
-3. **Target-owned editor UI** in the sibling `pxt-microbit` repository when a
+3. **Target-owned editor UI** in the sibling `cm-microbit-platform` repository (a fork of `pxt-microbit`) when a
    parameter needs a custom visual editor. The extension declares the shadow
    block and selector; the target registers and implements that selector.
 
@@ -40,7 +40,7 @@ ordinary GitHub extension cannot itself register a target-level Blockly field.
 | `tools/` | Reproducible fixture, native-decoder, and pinned-target checks |
 | `.github/workflows/makecode.yml` | CI commands that define the current automated gate |
 
-The sibling `../pxt-microbit` checkout contains the target-owned image editor:
+The sibling `../cm-microbit-platform` checkout contains the target-owned image editor:
 
 - `fieldeditors/inkyImageField.ts` owns the Blockly field value and lifecycle.
 - `fieldeditors/inkyImageEditor.ts` contains the drawing UI.
@@ -207,7 +207,7 @@ export function inkyimage_picker(image: Buffer = inkybitAllWhiteV1): Buffer {
 Important contracts:
 
 - `data.shadow` names the hidden shadow block's `blockId`.
-- `image.fieldEditor` names the selector registered by `pxt-microbit`.
+- `image.fieldEditor` names the selector registered by the platform (`cm-microbit-platform`).
 - `TD_ID` makes the shadow function an identity operation rather than a runtime
   feature.
 - `decompileLiterals` allows serialized literals to round-trip back into the
